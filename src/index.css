@@ -1,0 +1,644 @@
+﻿/* ==========================================================================
+   DR. KUNJ PATEL — LUXURY DERMATOLOGY DESIGN SYSTEM & ANIMATION ENGINE
+   ========================================================================== */
+
+:root {
+  /* Color Palette */
+  --bg-primary: #FBF9F5;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #F5EFE6;
+  --bg-dark: #121815;
+  --bg-dark-surface: #19221E;
+  
+  --text-primary: #151C18;
+  --text-secondary: #4A564F;
+  --text-muted: #7A8981;
+  --text-on-dark: #FBF9F5;
+  --text-on-dark-muted: #A3B2A9;
+  
+  --accent-gold: #C2A27A;
+  --accent-gold-dark: #9F7E53;
+  --accent-gold-light: #E8D9C5;
+  --accent-gold-subtle: rgba(194, 162, 122, 0.12);
+  --accent-gold-glow: rgba(194, 162, 122, 0.22);
+  
+  --accent-sage: #2A483C;
+  --accent-sage-dark: #1F362C;
+  --accent-sage-light: #EBF2EE;
+  
+  --border-subtle: rgba(21, 28, 24, 0.08);
+  --border-medium: rgba(21, 28, 24, 0.14);
+  --border-gold: rgba(194, 162, 122, 0.35);
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(18, 24, 21, 0.04);
+  --shadow-md: 0 8px 24px -4px rgba(18, 24, 21, 0.07), 0 2px 6px -2px rgba(18, 24, 21, 0.03);
+  --shadow-lg: 0 20px 40px -8px rgba(18, 24, 21, 0.09), 0 6px 16px -4px rgba(18, 24, 21, 0.04);
+  --shadow-xl: 0 30px 60px -12px rgba(18, 24, 21, 0.14);
+  --shadow-gold-hover: 0 16px 36px -8px rgba(194, 162, 122, 0.25);
+
+  /* Typography */
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Layout */
+  --container-max: 1240px;
+  --header-height: 80px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 9999px;
+
+  /* Modern Intrinsic Sizing Support */
+  interpolate-size: allow-keywords;
+}
+
+/* Reset & Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Base Container */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+/* ==========================================================================
+   KEYFRAME ANIMATIONS
+   ========================================================================== */
+
+@keyframes heroFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes heroSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroImageScale {
+  0% {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes ambientGlow {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translate(30px, -20px) scale(1.08);
+    opacity: 0.65;
+  }
+  100% {
+    transform: translate(-20px, 25px) scale(0.96);
+    opacity: 0.5;
+  }
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+/* ==========================================================================
+   SCROLL REVEAL UTILITIES
+   ========================================================================== */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+.delay-500 { transition-delay: 0.5s; }
+
+/* Image reveal clip mask transition */
+.image-reveal-wrapper {
+  overflow: hidden;
+  position: relative;
+  border-radius: var(--radius-md);
+}
+
+.image-reveal-wrapper img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .image-reveal-wrapper:hover img {
+    transform: scale(1.04);
+  }
+}
+
+/* ==========================================================================
+   BUTTONS & MICRO-INTERACTIONS
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s ease,
+              border-color 0.25s ease,
+              box-shadow 0.25s ease,
+              color 0.25s ease;
+  position: relative;
+  user-select: none;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: var(--accent-sage);
+  color: #FFFFFF;
+  border: 1px solid var(--accent-sage-dark);
+  box-shadow: 0 4px 14px rgba(42, 72, 60, 0.2);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover {
+    background-color: var(--accent-sage-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(42, 72, 60, 0.28);
+  }
+  
+  .btn-primary:hover .btn-icon-glide {
+    transform: translateX(3px);
+  }
+}
+
+.btn-gold {
+  background-color: var(--accent-gold);
+  color: #121815;
+  font-weight: 600;
+  border: 1px solid var(--accent-gold-dark);
+  box-shadow: 0 4px 14px rgba(194, 162, 122, 0.25);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-gold:hover {
+    background-color: #BA9970;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(194, 162, 122, 0.35);
+  }
+  
+  .btn-gold:hover .btn-icon-glide {
+    transform: translateX(3px);
+  }
+}
+
+.btn-secondary {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-secondary:hover {
+    background-color: var(--bg-surface-elevated);
+    border-color: var(--accent-gold);
+    color: var(--accent-sage);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.btn-whatsapp {
+  background-color: #25D366;
+  color: #FFFFFF;
+  border: 1px solid #1EBE5D;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
+  font-weight: 600;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-whatsapp:hover {
+    background-color: #1EBE5D;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.32);
+  }
+}
+
+.btn-icon-glide {
+  transition: transform 0.25s ease;
+  display: inline-flex;
+}
+
+/* Navigation Link Underline Micro-interaction */
+.nav-link {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  position: relative;
+  padding: 0.4rem 0;
+  transition: color 0.2s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   TREATMENT CARD STYLES
+   ========================================================================== */
+
+.treatment-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease;
+  position: relative;
+}
+
+.treatment-card-img-wrap {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--bg-surface-elevated);
+}
+
+.treatment-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.treatment-card-body {
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.treatment-card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  background-color: var(--accent-sage-light);
+  color: var(--accent-sage);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  margin-bottom: 1rem;
+  width: fit-content;
+}
+
+.treatment-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-primary);
+  margin-bottom: 0.6rem;
+}
+
+.treatment-card-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+}
+
+.treatment-card-list {
+  list-style: none;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.treatment-card-list li {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.treatment-card-list li svg {
+  color: var(--accent-gold);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.treatment-card-action {
+  margin-top: auto;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--accent-sage);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 0.25s ease;
+}
+
+.treatment-card-action .arrow-icon {
+  transition: transform 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .treatment-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-gold);
+    box-shadow: var(--shadow-lg), var(--shadow-gold-hover);
+  }
+
+  .treatment-card:hover .treatment-card-img-wrap img {
+    transform: scale(1.05);
+  }
+
+  .treatment-card:hover .treatment-card-action {
+    color: var(--accent-gold-dark);
+  }
+
+  .treatment-card:hover .treatment-card-action .arrow-icon {
+    transform: translateX(4px);
+  }
+}
+
+/* ==========================================================================
+   FAQ ACCORDION ANIMATION
+   ========================================================================== */
+
+.faq-item {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.faq-item:hover {
+  border-color: var(--border-gold);
+}
+
+.faq-item.is-open {
+  border-color: var(--accent-gold);
+  box-shadow: var(--shadow-sm);
+}
+
+.faq-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.3rem 1.6rem;
+  text-align: left;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.faq-trigger:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: -2px;
+}
+
+.faq-chevron {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--accent-gold);
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.faq-item.is-open .faq-chevron {
+  transform: rotate(180deg);
+}
+
+.faq-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.3s ease;
+  opacity: 0;
+}
+
+.faq-item.is-open .faq-content {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.faq-content-inner {
+  overflow: hidden;
+  padding: 0 1.6rem 1.4rem 1.6rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* ==========================================================================
+   MODAL DIALOG
+   ========================================================================== */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(18, 24, 21, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-dialog {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  max-width: 580px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border-gold);
+  transform: scale(0.94) translateY(20px);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  padding: 2.2rem;
+}
+
+.modal-backdrop.is-open .modal-dialog {
+  transform: scale(1) translateY(0);
+}
+
+/* ==========================================================================
+   PREFERS REDUCED MOTION SAFETY
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  .hero-animate-fade,
+  .hero-animate-slide,
+  .hero-animate-scale {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  .treatment-card-img-wrap img,
+  .image-reveal-wrapper img {
+    transform: none !important;
+  }
+}
